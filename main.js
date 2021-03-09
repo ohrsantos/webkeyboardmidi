@@ -6,6 +6,11 @@ const secondNote = 1;
 var notesBuffer = notesBufferOff = notesBufferAfterOff = [];
 var noteIndex = notesOffIdx = notesAfterOffIdx = 0;
 
+function setExtThird() {
+    var extThird = document.getElementById("extThird");
+    console.log(extThird.checked);
+}
+
 function dynamicSort(property) {
     var sortOrder = 1;
     if(property[0] === "-") {
@@ -23,7 +28,7 @@ function dynamicSort(property) {
 }
 
 function sendNotes() {
-    if ( (noteIndex > 2 ) && (noteIndex < 4 )) {
+    if ( (noteIndex > 2 ) && (noteIndex < 4 ) && (extThird.checked)) {
         notesBuffer.sort(dynamicSort("data"));
     //console.log('keys.js::notesBuffer:aftersort', notesBuffer);
         for (i = 0; i < noteIndex; i++)
@@ -36,10 +41,10 @@ function sendNotes() {
                                  ],
                                  0
                                );
-        notesBufferAfterOff[ notesBuffer[secondNote].data[1] ]= [ notesBuffer[secondNote].data[0] - 16,
-                                                                  notesBuffer[secondNote].data[1] + 12,
-                                                                  notesBuffer[secondNote].data[2]
-                                                                ];
+        notesBufferAfterOff[ notesBuffer[ secondNote].data[1] ]= [ notesBuffer[secondNote].data[0] - 16,
+                                                                   notesBuffer[secondNote].data[1] + 12,
+                                                                   notesBuffer[secondNote].data[2]
+                                                                 ];
      } else
         for (i = 0; i < noteIndex; i++)
             WebMidi.outputs[1].send(notesBuffer[i].data[0], notesBuffer[i].data.slice(1), 0);
@@ -89,7 +94,15 @@ WebMidi.enable(function (err) {
                                            window.setTimeout(sendNotes, 35);
 
                                        notesBuffer[noteIndex++] = e;
-                                       console.log('keys.js::noteon::e:', e);
+                                       console.log( e.timestamp.toFixed(1),
+                                                    e.target._midiInput.id,
+                                                    'nOn',
+                                                    e.channel,
+                                                    e.note.name.trim(),
+                                                    e.note.octave,
+                                                    e.rawVelocity
+                                                  );
+                                       //console.log(e);
 
                                    }
                                  );
