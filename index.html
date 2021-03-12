@@ -12,13 +12,35 @@
 	    <link rel="stylesheet" href="normalize.css">
 	    <link rel="stylesheet" href="skeleton.css">
 	    <link rel="stylesheet" href="style.css">
-        
+       	<style>
+	        canvas {
+		        -moz-user-select: none;
+		        -webkit-user-select: none;
+		        -ms-user-select: none;
+	        }
+        	.chart-container {
+        		width: 500px;
+        		margin-left: 40px;
+        		margin-right: 40px;
+        		margin-bottom: 40px;
+        	}
+        	.container {
+        		display: flex;
+        		flex-direction: row;
+        		flex-wrap: wrap;
+        		justify-content: center;
+        	}
+	    </style>
+    <script src="./chart.min.js"></script>
+    <script src="../utils.js"></script>        
+
         <!--<script src="QueryData.js"></script> -->
         <!--<script src="jscolor.js"></script> -->
         <!--<script type="module" src="webmidi/webmidi.min.mjs"></script> -->
 
     </head>
     <body style="overflow: scroll;">
+        <h1> Console </h1>
         <div class="one-half column thincol-parent">
         	<div class="u-half-width">
               <label>
@@ -29,8 +51,13 @@
         	</div>
         </div>
     
-        <script src="./webmidi/src/webmidi.js"></script>
-    	<script src="main.js"></script>
-    
+    <div class="container" style="width: 75%">  
+        <canvas id="canvas-combo"></canvas>
+    </div> 
+    <button id="randomizeData">Randomize Data</button>
+    <script src=./combo.js> </script>
+
     </body>
+    <script src="./webmidi/src/webmidi.js"></script>
+    <script src="main.js"></script>
 </html>

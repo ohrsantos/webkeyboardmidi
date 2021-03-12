@@ -35,11 +35,11 @@ function sendNotes() {
             if ( i != secondNote )
             WebMidi.outputs[1].send(notesBuffer[i].data[0], notesBuffer[i].data.slice(1), 0);
 
-        WebMidi.outputs[1].send( notesBuffer[secondNote].data[0],
+        WebMidi.outputs[1].send(   notesBuffer[secondNote].data[0],
                                  [ notesBuffer[secondNote].data[1] + 12,
                                    notesBuffer[secondNote].data[2]
                                  ],
-                                 0
+                                   0
                                );
         notesBufferAfterOff[ notesBuffer[ secondNote].data[1] ]= [ notesBuffer[secondNote].data[0] - 16,
                                                                    notesBuffer[secondNote].data[1] + 12,
